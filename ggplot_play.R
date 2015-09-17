@@ -1,7 +1,17 @@
+# ggplot playground
+
 library(ggplot2)
-set.seed(10)
+library(dplyr)
+data("midwest")
 
-df <- data.frame(foo = rnorm(10), bar = rnorm(5))
 
-pl <- qplot(df$foo, df$bar, geom="line", xlab="foo", ylab="bar")00
-print (pl)
+pl <- ggplot(midwest, aes(factor(state))) +
+    geom_bar(width=0.5)
+
+#print (pl)
+
+pl2 <- ggplot(midwest, aes(county, poptotal, fill=state)) +
+    geom_bar(stat="identity") +
+    coord_flip()
+
+print(pl2)
